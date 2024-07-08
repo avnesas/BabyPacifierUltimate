@@ -1,14 +1,9 @@
-<html w-tid="0"><head w-tid="1"><base href w-tid="2"/>
-<link rel="stylesheet" href="https://party.websim.ai/fonts.css?v=d1cb417a1684cb1af5cf7ed54e4e448ea2783487">
-<link rel="stylesheet" href="https://party.websim.ai/ctxmenu.css?v=d1cb417a1684cb1af5cf7ed54e4e448ea2783487">
-<script class="websim-injected">__WEBSIM_DATA__={"locationKey":"_iwpi66dgye9","titleKey":"_t127imooznj","id":"WsssfKzbngHGogU7m","url":"https://websim.ai","version":"d1cb417a1684cb1af5cf7ed54e4e448ea2783487","method":"eval","command":"Make this mobile friendly, normal text size"}</script>
-<script class="websim-injected" src="https://party.websim.ai/dist/index.js?v=d1cb417a1684cb1af5cf7ed54e4e448ea2783487"></script>
-
-<title w-tid="3">Baby Pacifier Ultimate</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" w-tid="4"/>
-<style w-tid="5">
+<html><head><base href="https://websim.ai" />
+<title>Baby Pacifier Ultimate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
     background-color: #87CEEB;
     margin: 0;
     padding: 0;
@@ -27,33 +22,38 @@
     align-items: center;
     background: linear-gradient(135deg, #87CEEB, #4682B4);
     z-index: 100;
-    padding: 20px;
-    box-sizing: border-box;
   }
   .menu-button {
-    font-size: 18px;
-    padding: 10px 20px;
-    margin: 10px;
+    font-size: 24px;
+    padding: 15px 30px;
+    margin: 15px;
     cursor: pointer;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   }
-  .menu-button:hover, .menu-button:active {
+  .menu-button:hover {
+    transform: scale(1.1);
     background-color: #45a049;
   }
   #game-title {
-    font-size: 32px;
+    font-size: 36px;
     color: #FFD700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
     margin-bottom: 20px;
+    animation: bounce 2s infinite;
     text-align: center;
   }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-20px);}
+    60% {transform: translateY(-10px);}
+  }
   #high-score {
-    font-size: 18px;
+    font-size: 20px;
     color: #FFF;
     margin-bottom: 15px;
   }
@@ -61,9 +61,9 @@
     font-size: 16px;
     color: #FFF;
     text-align: center;
-    max-width: 100%;
+    max-width: 90%;
     margin-bottom: 20px;
-    line-height: 1.4;
+    line-height: 1.5;
   }
   .baby {
     width: 60px;
@@ -101,13 +101,19 @@
   #score, #pause-button {
     position: absolute;
     top: 10px;
-    font-size: 18px;
+    font-size: 20px;
     color: #fff;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    z-index: 20;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   }
-  #score { left: 10px; }
-  #pause-button { right: 10px; cursor: pointer; }
+  #score { left: 10px; z-index: 20; }
+  #pause-button { 
+    right: 10px; 
+    cursor: pointer; 
+    z-index: 40;
+    background-color: rgba(0,0,0,0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
   .happy-baby {
     transform: scale(0.8);
     opacity: 0.5;
@@ -121,7 +127,7 @@
     font-size: 16px;
     font-weight: bold;
     color: #FF69B4;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     pointer-events: none;
     animation: flyOut 2s forwards;
     z-index: 15;
@@ -134,13 +140,20 @@
   .shaking {
     animation: shake 0.2s infinite;
   }
+  @keyframes flash {
+    0%, 50%, 100% { color: #fff; }
+    25%, 75% { color: #FFD700; }
+  }
+  .flashing {
+    animation: flash 0.5s;
+  }
   #version {
     position: absolute;
     bottom: 5px;
     right: 5px;
     font-size: 12px;
     color: #fff;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     z-index: 20;
   }
   #pause-overlay {
@@ -162,47 +175,47 @@
   }
   .score-pop {
     position: absolute;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #FFD700;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     pointer-events: none;
     animation: scorePop 1s forwards;
     z-index: 25;
   }
   @keyframes scorePop {
     0% { transform: translate(0, 0) scale(1); opacity: 1; }
-    100% { transform: translate(0, -30px) scale(1.3); opacity: 0; }
+    100% { transform: translate(0, -30px) scale(1.5); opacity: 0; }
   }
 </style>
 </head>
-<body w-tid="6">
-<div id="menu-container" w-tid="7">
-  <h1 id="game-title" w-tid="8">Baby Pacifier Ultimate</h1>
-  <div id="high-score" w-tid="9">High Score: <span id="high-score-value" w-tid="10">0</span></div>
-  <div id="instructions" w-tid="11">
-    Calm crying babies by dragging them to the ice cream truck. Keep going until you've calmed all the babies! How many can you pacify?
+<body>
+<div id="menu-container">
+  <h1 id="game-title">Baby Pacifier Ultimate</h1>
+  <div id="high-score">High Score: <span id="high-score-value">0</span></div>
+  <div id="instructions">
+    Welcome to Baby Pacifier Ultimate! Calm crying babies by dragging them to the ice cream truck. Keep going until you've calmed all the babies! How many can you pacify?
   </div>
-  <button id="start-button" class="menu-button" w-tid="12">Start Game</button>
+  <button id="start-button" class="menu-button">Start Game</button>
 </div>
-<div id="game-container" style="display: none;" w-tid="13">
-  <div id="ice-cream-truck" w-tid="14">
-    <img src="https://static.vecteezy.com/system/resources/previews/020/953/549/original/cute-pastel-color-ice-cream-truck-illustration-for-poster-kid-wear-element-card-free-png.png" alt="Cute Ice Cream Truck" w-tid="15"/>
+<div id="game-container" style="display: none;">
+  <div id="ice-cream-truck">
+    <img src="https://static.vecteezy.com/system/resources/previews/020/953/549/original/cute-pastel-color-ice-cream-truck-illustration-for-poster-kid-wear-element-card-free-png.png" alt="Cute Ice Cream Truck">
   </div>
-  <div id="score" w-tid="16">Babies Calmed: <span id="calmed-count" w-tid="17">0</span></div>
-  <div id="pause-button" w-tid="18">⏸️</div>
-  <div id="version" w-tid="19">v1.6</div>
-  <div id="pause-overlay" w-tid="20">
-    <div id="pause-text" w-tid="21">PAUSED</div>
+  <div id="score">Babies Calmed: <span id="calmed-count">0</span></div>
+  <div id="pause-button">⏸️</div>
+  <div id="version">v1.6</div>
+  <div id="pause-overlay">
+    <div id="pause-text">PAUSED</div>
   </div>
 </div>
 
-<audio id="calming-sound" w-tid="22">
-  <source src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Quick_chime.ogg" type="audio/ogg" w-tid="23"/>
+<audio id="calming-sound">
+  <source src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Quick_chime.ogg" type="audio/ogg">
   Your browser does not support the audio element.
 </audio>
 
-<script w-tid="24">
+<script>
 const menuContainer = document.getElementById('menu-container');
 const gameContainer = document.getElementById('game-container');
 const startButton = document.getElementById('start-button');
@@ -264,8 +277,8 @@ function createBaby() {
   img.alt = 'Crying baby';
   baby.appendChild(img);
 
-  baby.addEventListener('touchstart', startDragging);
   baby.addEventListener('mousedown', startDragging);
+  baby.addEventListener('touchstart', startDragging, { passive: false });
   gameContainer.appendChild(baby);
   babyCount++;
 
@@ -306,14 +319,10 @@ function startDragging(e) {
   offsetX = touch.clientX - rect.left;
   offsetY = touch.clientY - rect.top;
   draggedElement.classList.add('shaking');
-  
-  if (e.type === 'touchstart') {
-    document.addEventListener('touchmove', drag);
-    document.addEventListener('touchend', stopDragging);
-  } else {
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', stopDragging);
-  }
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('touchmove', drag, { passive: false });
+  document.addEventListener('mouseup', stopDragging);
+  document.addEventListener('touchend', stopDragging);
 }
 
 function drag(e) {
@@ -344,10 +353,10 @@ function stopDragging(e) {
   }
   
   draggedElement = null;
-  document.removeEventListener('touchmove', drag);
-  document.removeEventListener('touchend', stopDragging);
   document.removeEventListener('mousemove', drag);
+  document.removeEventListener('touchmove', drag);
   document.removeEventListener('mouseup', stopDragging);
+  document.removeEventListener('touchend', stopDragging);
 }
 
 function calmBaby(baby, e) {
@@ -392,21 +401,37 @@ function moveIceCreamTruck() {
   const newX = Math.random() * maxX;
   const newY = Math.random() * maxY;
   
-  iceCreamTruck.style.left = `${newX}px`;
+  iceCreamTruck.style.left =`${newX}px`;
   iceCreamTruck.style.top = `${newY}px`;
 }
 
 function gameLoop() {
   gameInterval = setInterval(() => {
     if (isGamePaused) return;
-    if (babyCount < 10) {
+    if (babyCount < 15) {
       createBaby();
     }
     moveIceCreamTruck();
-  }, 2000);
+  }, 1500);
 }
 
 // Initial position for the ice cream truck
 moveIceCreamTruck();
+
+// Prevent scrolling on mobile devices
+document.body.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+}, { passive: false });
+
+// Resize handler
+window.addEventListener('resize', function() {
+  moveIceCreamTruck();
+  gameContainer.querySelectorAll('.baby').forEach(baby => {
+    const maxX = window.innerWidth - baby.offsetWidth;
+    const maxY = window.innerHeight - baby.offsetHeight;
+    baby.style.left = Math.min(parseInt(baby.style.left), maxX) + 'px';
+    baby.style.top = Math.min(parseInt(baby.style.top), maxY) + 'px';
+  });
+});
 </script>
 </body></html>
