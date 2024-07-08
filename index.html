@@ -1,0 +1,412 @@
+<html w-tid="0"><head w-tid="1"><base href w-tid="2"/>
+<link rel="stylesheet" href="https://party.websim.ai/fonts.css?v=d1cb417a1684cb1af5cf7ed54e4e448ea2783487">
+<link rel="stylesheet" href="https://party.websim.ai/ctxmenu.css?v=d1cb417a1684cb1af5cf7ed54e4e448ea2783487">
+<script class="websim-injected">__WEBSIM_DATA__={"locationKey":"_iwpi66dgye9","titleKey":"_t127imooznj","id":"WsssfKzbngHGogU7m","url":"https://websim.ai","version":"d1cb417a1684cb1af5cf7ed54e4e448ea2783487","method":"eval","command":"Make this mobile friendly, normal text size"}</script>
+<script class="websim-injected" src="https://party.websim.ai/dist/index.js?v=d1cb417a1684cb1af5cf7ed54e4e448ea2783487"></script>
+
+<title w-tid="3">Baby Pacifier Ultimate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" w-tid="4"/>
+<style w-tid="5">
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #87CEEB;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    touch-action: none;
+  }
+  #game-container, #menu-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+  #menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #87CEEB, #4682B4);
+    z-index: 100;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .menu-button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  }
+  .menu-button:hover, .menu-button:active {
+    background-color: #45a049;
+  }
+  #game-title {
+    font-size: 32px;
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  #high-score {
+    font-size: 18px;
+    color: #FFF;
+    margin-bottom: 15px;
+  }
+  #instructions {
+    font-size: 16px;
+    color: #FFF;
+    text-align: center;
+    max-width: 100%;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  .baby {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    cursor: move;
+    user-select: none;
+    transition: transform 0.2s;
+    border-radius: 50%;
+    overflow: visible;
+    z-index: 10;
+  }
+  .baby img {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  #ice-cream-truck {
+    width: 150px;
+    height: 112px;
+    position: absolute;
+    cursor: move;
+    user-select: none;
+    transition: left 2s, top 2s;
+    z-index: 5;
+  }
+  #ice-cream-truck img {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    object-fit: contain;
+  }
+  #score, #pause-button {
+    position: absolute;
+    top: 10px;
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    z-index: 20;
+  }
+  #score { left: 10px; }
+  #pause-button { right: 10px; cursor: pointer; }
+  .happy-baby {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  @keyframes flyOut {
+    0% { transform: translate(0, 0); opacity: 1; }
+    100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+  }
+  .waa {
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FF69B4;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    pointer-events: none;
+    animation: flyOut 2s forwards;
+    z-index: 15;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px) rotate(-3deg); }
+    75% { transform: translateX(3px) rotate(3deg); }
+  }
+  .shaking {
+    animation: shake 0.2s infinite;
+  }
+  #version {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 12px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    z-index: 20;
+  }
+  #pause-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+  }
+  #pause-text {
+    font-size: 36px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  .score-pop {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    pointer-events: none;
+    animation: scorePop 1s forwards;
+    z-index: 25;
+  }
+  @keyframes scorePop {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(0, -30px) scale(1.3); opacity: 0; }
+  }
+</style>
+</head>
+<body w-tid="6">
+<div id="menu-container" w-tid="7">
+  <h1 id="game-title" w-tid="8">Baby Pacifier Ultimate</h1>
+  <div id="high-score" w-tid="9">High Score: <span id="high-score-value" w-tid="10">0</span></div>
+  <div id="instructions" w-tid="11">
+    Calm crying babies by dragging them to the ice cream truck. Keep going until you've calmed all the babies! How many can you pacify?
+  </div>
+  <button id="start-button" class="menu-button" w-tid="12">Start Game</button>
+</div>
+<div id="game-container" style="display: none;" w-tid="13">
+  <div id="ice-cream-truck" w-tid="14">
+    <img src="https://static.vecteezy.com/system/resources/previews/020/953/549/original/cute-pastel-color-ice-cream-truck-illustration-for-poster-kid-wear-element-card-free-png.png" alt="Cute Ice Cream Truck" w-tid="15"/>
+  </div>
+  <div id="score" w-tid="16">Babies Calmed: <span id="calmed-count" w-tid="17">0</span></div>
+  <div id="pause-button" w-tid="18">⏸️</div>
+  <div id="version" w-tid="19">v1.6</div>
+  <div id="pause-overlay" w-tid="20">
+    <div id="pause-text" w-tid="21">PAUSED</div>
+  </div>
+</div>
+
+<audio id="calming-sound" w-tid="22">
+  <source src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Quick_chime.ogg" type="audio/ogg" w-tid="23"/>
+  Your browser does not support the audio element.
+</audio>
+
+<script w-tid="24">
+const menuContainer = document.getElementById('menu-container');
+const gameContainer = document.getElementById('game-container');
+const startButton = document.getElementById('start-button');
+const iceCreamTruck = document.getElementById('ice-cream-truck');
+const calmedCountElement = document.getElementById('calmed-count');
+const pauseButton = document.getElementById('pause-button');
+const pauseOverlay = document.getElementById('pause-overlay');
+const calmingSound = document.getElementById('calming-sound');
+const highScoreElement = document.getElementById('high-score-value');
+let calmedCount = 0;
+let babyCount = 0;
+let isGamePaused = false;
+let gameInterval;
+let highScore = 0;
+
+startButton.addEventListener('click', startGame);
+pauseButton.addEventListener('click', togglePause);
+
+function startGame() {
+  menuContainer.style.display = 'none';
+  gameContainer.style.display = 'block';
+  isGamePaused = false;
+  resetGame();
+  gameLoop();
+}
+
+function resetGame() {
+  calmedCount = 0;
+  babyCount = 0;
+  calmedCountElement.textContent = calmedCount;
+  gameContainer.querySelectorAll('.baby').forEach(baby => baby.remove());
+  for (let i = 0; i < 5; i++) {
+    createBaby();
+  }
+  moveIceCreamTruck();
+}
+
+function togglePause() {
+  isGamePaused = !isGamePaused;
+  if (isGamePaused) {
+    pauseButton.textContent = '▶️';
+    clearInterval(gameInterval);
+    pauseOverlay.style.display = 'flex';
+  } else {
+    pauseButton.textContent = '⏸️';
+    gameLoop();
+    pauseOverlay.style.display = 'none';
+  }
+}
+
+function createBaby() {
+  const baby = document.createElement('div');
+  baby.className = 'baby';
+  baby.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+  baby.style.top = Math.random() * (window.innerHeight - 60) + 'px';
+  
+  const img = document.createElement('img');
+  img.src = 'https://www.stronglittlesleepers.com/wp-content/uploads/2014/09/Crying-Baby.jpg';
+  img.alt = 'Crying baby';
+  baby.appendChild(img);
+
+  baby.addEventListener('touchstart', startDragging);
+  baby.addEventListener('mousedown', startDragging);
+  gameContainer.appendChild(baby);
+  babyCount++;
+
+  animateWaa(baby);
+}
+
+function animateWaa(baby) {
+  const waaInterval = setInterval(() => {
+    if (isGamePaused) return;
+    const waa = document.createElement('div');
+    waa.className = 'waa';
+    waa.textContent = 'WAA!';
+    waa.style.left = `${Math.random() * 40 + 10}px`;
+    waa.style.top = `${Math.random() * 40 + 10}px`;
+    waa.style.setProperty('--x', `${(Math.random() - 0.5) * 60}px`);
+    waa.style.setProperty('--y', `${(Math.random() - 0.5) * 60}px`);
+    baby.appendChild(waa);
+
+    setTimeout(() => {
+      waa.remove();
+    }, 2000);
+
+    if (baby.classList.contains('happy-baby') || !gameContainer.contains(baby)) {
+      clearInterval(waaInterval);
+    }
+  }, 1000);
+}
+
+let draggedElement = null;
+let offsetX, offsetY;
+
+function startDragging(e) {
+  if (isGamePaused) return;
+  e.preventDefault();
+  draggedElement = e.target.closest('.baby') || e.target;
+  const touch = e.type === 'touchstart' ? e.touches[0] : e;
+  const rect = draggedElement.getBoundingClientRect();
+  offsetX = touch.clientX - rect.left;
+  offsetY = touch.clientY - rect.top;
+  draggedElement.classList.add('shaking');
+  
+  if (e.type === 'touchstart') {
+    document.addEventListener('touchmove', drag);
+    document.addEventListener('touchend', stopDragging);
+  } else {
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDragging);
+  }
+}
+
+function drag(e) {
+  if (draggedElement && !isGamePaused) {
+    e.preventDefault();
+    const touch = e.type === 'touchmove' ? e.touches[0] : e;
+    draggedElement.style.left = touch.clientX - offsetX + 'px';
+    draggedElement.style.top = touch.clientY - offsetY + 'px';
+  }
+}
+
+function stopDragging(e) {
+  if (draggedElement) {
+    draggedElement.classList.remove('shaking');
+    if (draggedElement.classList.contains('baby')) {
+      const babyRect = draggedElement.getBoundingClientRect();
+      const truckRect = iceCreamTruck.getBoundingClientRect();
+      
+      if (
+        babyRect.left < truckRect.right &&
+        babyRect.right > truckRect.left &&
+        babyRect.top < truckRect.bottom &&
+        babyRect.bottom > truckRect.top
+      ) {
+        calmBaby(draggedElement, e);
+      }
+    }
+  }
+  
+  draggedElement = null;
+  document.removeEventListener('touchmove', drag);
+  document.removeEventListener('touchend', stopDragging);
+  document.removeEventListener('mousemove', drag);
+  document.removeEventListener('mouseup', stopDragging);
+}
+
+function calmBaby(baby, e) {
+  baby.classList.add('happy-baby');
+  baby.style.pointerEvents = 'none';
+  calmedCount++;
+  calmedCountElement.textContent = calmedCount;
+  
+  if (calmedCount > highScore) {
+    highScore = calmedCount;
+    highScoreElement.textContent = highScore;
+  }
+  
+  // Play calming sound
+  calmingSound.currentTime = 0;
+  calmingSound.play();
+  
+  // Create score pop
+  const scorePop = document.createElement('div');
+  scorePop.className = 'score-pop';
+  scorePop.textContent = calmedCount;
+  const touch = e.type.startsWith('touch') ? e.changedTouches[0] : e;
+  scorePop.style.left = `${touch.clientX}px`;
+  scorePop.style.top = `${touch.clientY}px`;
+  gameContainer.appendChild(scorePop);
+  
+  setTimeout(() => {
+    scorePop.remove();
+  }, 1000);
+  
+  setTimeout(() => {
+    if (gameContainer.contains(baby)) {
+      gameContainer.removeChild(baby);
+      babyCount--;
+    }
+  }, 1000);
+}
+
+function moveIceCreamTruck() {
+  const maxX = window.innerWidth - iceCreamTruck.offsetWidth;
+  const maxY = window.innerHeight - iceCreamTruck.offsetHeight;
+  const newX = Math.random() * maxX;
+  const newY = Math.random() * maxY;
+  
+  iceCreamTruck.style.left = `${newX}px`;
+  iceCreamTruck.style.top = `${newY}px`;
+}
+
+function gameLoop() {
+  gameInterval = setInterval(() => {
+    if (isGamePaused) return;
+    if (babyCount < 10) {
+      createBaby();
+    }
+    moveIceCreamTruck();
+  }, 2000);
+}
+
+// Initial position for the ice cream truck
+moveIceCreamTruck();
+</script>
+</body></html>
